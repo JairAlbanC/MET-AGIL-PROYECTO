@@ -1,0 +1,299 @@
+h1 {
+    text-align: center;
+    color: #00796b; /* Cian oscuro para el título principal */
+    margin-bottom: 30px;
+}
+
+h2, h3 {
+    text-align: center;
+    color: #00796b; /* Cian oscuro para subtítulos */
+    margin-top: 30px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e0f2f1; /* Separador sutil */
+    padding-bottom: 10px;
+}
+
+/* --- Estilo de Tarjeta para Secciones Principales (Formularios, Tablas) --- */
+.formulario-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra suave */
+    padding: 30px; /* Espacio interno generoso */
+    margin-bottom: 25px; /* Espacio entre secciones */
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 900px; /* Ancho máximo para evitar estiramiento excesivo */
+    margin-left: auto; /* Centra horizontalmente */
+    margin-right: auto; /* Centra horizontalmente */
+}
+
+/* --- Contenedor Flexible para Campos de Formulario --- */
+.form-grid-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea */
+    gap: 20px; /* Espacio entre los grupos de campos */
+    margin-bottom: 20px; /* Espacio debajo del contenedor de campos */
+}
+
+/* --- Estilos para Cada Grupo de Campo (Label + Input/Select) --- */
+.form-field-group {
+    flex: 1 1 200px; /* Crece (1), se encoge (1), base de 200px */
+    min-width: 180px; /* Ancho mínimo para legibilidad */
+    display: flex;
+    flex-direction: column; /* Apila la etiqueta sobre el input */
+    box-sizing: border-box;
+}
+
+/* --- Estilos para Labels --- */
+.form-field-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+    font-size: 0.95em;
+}
+
+/* --- Estilos para Inputs y Selects --- */
+.form-field-group input[type="text"],
+.form-field-group input[type="email"],
+.form-field-group input[type="tel"],
+.form-field-group input[type="number"],
+.form-field-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bdbdbd; /* Borde gris claro */
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    color: #333;
+    background-color: #fcfcfc; /* Fondo ligeramente blanquecino */
+}
+
+/* --- Estilos de Foco para Inputs --- */
+.form-field-group input:focus,
+.form-field-group select:focus {
+    border-color: #00796b;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2);
+}
+
+/* --- Contenedor de Botones del Formulario --- */
+.form-actions {
+    display: flex;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+    gap: 15px; /* Espacio entre botones */
+    margin-top: 25px; /* Espacio superior */
+}
+
+/* --- Botón Primario (Guardar, Actualizar) --- */
+.btn-primary-form {
+    background-color: #00796b; /* Cian oscuro */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.btn-primary-form:hover {
+    background-color: #004d40;
+    transform: translateY(-2px);
+}
+
+/* --- Botón Secundario (Limpiar, Cancelar) --- */
+.btn-secondary {
+    background-color: #9E9E9E; /* Gris */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.btn-secondary:hover {
+    background-color: #616161;
+    transform: translateY(-2px);
+}
+
+/* --- Estilos para Mensajes de Error de Validación --- */
+.error-message {
+    color: #e53935; /* Rojo */
+    font-size: 0.85em;
+    margin-top: 5px;
+    display: block;
+    height: 1.2em; /* Altura fija para evitar saltos de layout */
+    text-align: left;
+}
+
+/* Estilo para inputs con error */
+.form-field-group input.invalid,
+.form-field-group select.invalid {
+    border-color: #e53935; /* Borde rojo */
+    box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.2); /* Sombra roja sutil */
+}
+
+/* Restablecer estilos al enfocar un campo con error */
+.form-field-group input.invalid:focus,
+.form-field-group select.invalid:focus {
+    border-color: #00796b;
+    box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2);
+}
+
+
+/* --- Estilos de Tabla --- */
+.table-responsive {
+    overflow-x: auto; /* Permite desplazamiento horizontal en tablas grandes */
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: white;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    overflow: hidden; /* Asegura que el borde redondeado se aplique */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #00796b;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    padding: 15px 12px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2fafa; /* Cebrado */
+}
+
+tbody tr:hover {
+    background-color: #e0f7fa; /* Efecto hover en filas */
+}
+
+/* --- Contenedor de Botones de Acción de Tabla --- */
+.table-actions {
+    display: flex;
+    justify-content: center; /* Centra los botones debajo de la tabla */
+    gap: 15px; /* Espacio entre los botones */
+    margin-top: 25px;
+}
+
+/* Botón de Editar en Fila/Global */
+.btn-editar-fila { /* Para botones de editar dentro de cada fila */
+    background-color: #fb8c00; /* Naranja */
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.btn-editar-fila:hover {
+    background-color: #e65100;
+}
+
+/* Botón de Eliminar en Fila/Global */
+.btn-eliminar-fila { /* Para botones de eliminar dentro de cada fila */
+    background-color: #e53935; /* Rojo */
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.btn-eliminar-fila:hover {
+    background-color: #c62828;
+}
+
+/* --- Ajustes Responsivos --- */
+@media (max-width: 992px) {
+    .formulario-card {
+        padding: 25px;
+        margin-bottom: 20px;
+    }
+    .form-grid-container {
+        gap: 15px;
+    }
+    .form-field-group {
+        flex: 1 1 200px;
+    }
+    h1 { font-size: 2em; margin-bottom: 25px; }
+    h2, h3 { font-size: 1.6em; margin-bottom: 20px; }
+    .btn-primary-form, .btn-secondary, .btn-editar-fila, .btn-eliminar-fila {
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+    table { font-size: 0.9em; }
+    th, td { padding: 10px; }
+}
+
+@media (max-width: 768px) {
+    .form-grid-container {
+        flex-direction: column; /* Apila campos verticalmente */
+        gap: 10px;
+    }
+    .form-field-group {
+        flex: 1 1 100%;
+        min-width: unset;
+    }
+    .formulario-card {
+        padding: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    h1 { font-size: 1.8em; margin-bottom: 20px; }
+    h2, h3 { font-size: 1.4em; margin-bottom: 15px; }
+    .form-actions, .table-actions {
+        flex-direction: column; /* Apila botones verticalmente */
+        gap: 10px;
+    }
+    .btn-primary-form, .btn-secondary, .btn-editar-fila, .btn-eliminar-fila {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        transform: none;
+        box-shadow: none;
+    }
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    table {
+        min-width: 600px; /* Asegura un ancho mínimo para desplazamiento */
+    }
+}
+
+@media (max-width: 480px) {
+    .formulario-card {
+        padding: 15px;
+    }
+    h1 { font-size: 1.5em; }
+    h2, h3 { font-size: 1.2em; }
+    .btn-primary-form, .btn-secondary, .btn-editar-fila, .btn-eliminar-fila {
+        padding: 10px 15px;
+        font-size: 0.85em;
+    }
+}

@@ -1,0 +1,244 @@
+h2, h3 {
+    text-align: center;
+    color: #00796b; /* Dark cyan for headers */
+    margin-bottom: 25px; /* Adds space below headers */
+}
+
+/* --- Card-like styling for form and list sections --- */
+/* This will apply to .formulario and .lista-libros (now using .formulario-card) */
+.formulario-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Soft shadow */
+    padding: 30px; /* Generous internal padding */
+    margin-bottom: 25px; /* Space between sections */
+    box-sizing: border-box;
+    width: 100%; /* Ensures they take full width within .page-content.container */
+    max-width: 900px; /* Max width to prevent form/table from being too stretched */
+    margin-left: auto; /* Center within the .page-content.container */
+    margin-right: auto; /* Center within the .page-content.container */
+}
+
+.lista-libros.formulario-card {
+    width: 100%;
+    max-width: 1300px; /* O más grande si deseas, como 1600px */
+    margin: 20px auto;
+}
+
+
+/* --- Flexbox Container for Form Fields --- */
+/* This is the key to placing elements side-by-side */
+.form-grid-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    gap: 20px; /* Space between individual form field groups */
+    margin-bottom: 20px; /* Space below the entire group of fields */
+}
+
+/* Styles for each individual form field group (label + input/select) */
+.form-field-group {
+    flex: 1 1 200px; /* Allows fields to grow (1), shrink (1), and have a base width of 200px.
+                       Adjust 200px to control how many fit per row. */
+    min-width: 180px; /* Ensures fields don't get too narrow on smaller screens */
+    display: flex; /* Makes label stack above input */
+    flex-direction: column;
+    margin-bottom: 15px;
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+/* Styles for labels within form field groups */
+.form-field-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+    font-size: 0.95em;
+}
+
+
+
+/* Styles for input fields and selects within form field groups */
+.form-field-group input, 
+.form-field-group select { /* Targeting elements inside form-field-group specifically */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bdbdbd; /* Consistent light gray border */
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    color: #333;
+    background-color: #fcfcfc; /* Slightly off-white background for inputs */
+}
+
+/* Focus styles for inputs */
+.form-field-group input:focus,
+.form-field-group select:focus {
+    border-color: #00796b; /* Darker cyan on focus */
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2); /* Subtle focus ring */
+}
+
+/* --- Styles for primary action buttons (like "Registrar Libro") --- */
+#registrar.btn-primary-form { /* Use ID and class for specificity */
+    background-color: #00796b; /* Dark cyan */
+    color: white;
+    padding: 12px 25px; /* Generous padding */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    width: auto; /* Allow button to size to its content */
+    display: block; /* Make it a block element to center with margin: auto */
+    margin: 25px auto 10px auto; /* Center horizontally and provide space */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+#registrar.btn-primary-form:hover {
+    background-color: #004d40; /* Darker cyan on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+
+/* Specific styles for action buttons (Edit, Delete) in tables/lists */
+button.editar {
+    background-color: #fb8c00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.editar:hover {
+    background-color: #e65100;
+}
+
+button.eliminar {
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.eliminar:hover {
+    background-color: #c62828;
+}
+
+/* Table styles */
+.table-responsive {
+    overflow-x: auto; /* Ensures table is scrollable on small screens */
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+table { /* This targets the table within .lista-libros */
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: white;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Added for consistency */
+    border-radius: 8px; /* Added for consistency */
+    overflow: hidden;
+    min-width: 1200px;
+}
+
+
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px; /* Increased padding for consistency */
+    text-align: left;
+}
+
+
+th {
+    background-color: #00796b; /* Dark cyan for table headers */
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    padding: 15px 12px; /* More padding for headers */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2fafa;
+}
+
+tbody tr:hover {
+    background-color: #e0f7fa;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 992px) {
+    .formulario-card {
+        padding: 25px; /* Slightly less padding */
+        margin-bottom: 20px;
+    }
+    
+    .form-grid-container {
+        gap: 15px; /* Slightly less gap */
+    }
+    .form-field-group {
+        flex: 1 1 200px; /* Adjust base width */
+    }
+    h2, h3 { font-size: 1.6em; margin-bottom: 20px; }
+    #registrar.btn-primary-form {
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+    table { font-size: 0.9em; }
+    th, td { padding: 10px; }
+}
+
+@media (max-width: 768px) {
+    .form-grid-container {
+        flex-direction: column; /* Stack fields vertically on smaller screens */
+        gap: 10px;
+    }
+    .form-field-group {
+        flex: 1 1 100%; /* Each field takes full width */
+        min-width: unset;
+    }
+    .formulario-card {
+        padding: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    h2, h3 { font-size: 1.4em; margin-bottom: 15px; }
+    #registrar.btn-primary-form {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        transform: none;
+        box-shadow: none;
+    }
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    table {
+        min-width: 700px; /* Ensure table has a minimum width for scrolling if needed */
+    }
+}
+
+@media (max-width: 480px) {
+    .formulario-card {
+        padding: 15px;
+    }
+    h2, h3 { font-size: 1.2em; }
+    #registrar.btn-primary-form {
+        padding: 10px 15px;
+        font-size: 0.85em;
+    }
+}

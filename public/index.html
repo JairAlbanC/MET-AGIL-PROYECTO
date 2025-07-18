@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión - Dashboard</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.9.1/chart.min.js"></script>
+    <!-- Librería jsPDF para generar PDFs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <button class="hamburger-menu" id="toggleSidebar">
+                   <i class="fas fa-bars"></i>
+                </button>
+                <div class="sidebar-logo-area">
+                    <img src="logo.png" alt="Logo del Sistema" style="height: 60px; margin-bottom: 10px;"> 
+                    <a href="index.html" class="sidebar-logo-text">Sistema de Gestión</a>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav-main">
+                <h3 class="nav-section-title">MENÚ PRINCIPAL</h3>
+                <ul>
+                    <li><a href="Jair/libros.html" class="nav-item"><i class="fas fa-book"></i> Libros</a></li>
+                    <li><a href="Jair/autor.html" class="nav-item"><i class="fas fa-user-edit"></i> Autores</a></li>
+                    <li><a href="Maria/editorial.html" class="nav-item"><i class="fas fa-building"></i> Editoriales</a></li>
+                    <li><a href="Leonardo/factura.html" class="nav-item"><i class="fas fa-file-invoice"></i> Facturas</a></li>
+                    <li><a href="Ashley/cliente.html" class="nav-item"><i class="fas fa-users"></i> Clientes</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-bottom-links">
+                <ul>
+                    <li><a href="index.html" class="nav-item active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" class="nav-item"><i class="fas fa-bell"></i> Notificaciones</a></li>
+                    <li><a href="#" class="nav-item"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="main-content-area">
+            <header class="topbar">
+                <p>Bienvenido, <span id="username">Usuario Admin</span></p>
+                <button class="refresh-button" onclick="refreshDashboard()">
+                    <i class="fas fa-sync-alt"></i> Actualizar
+                </button>
+            </header>
+
+            <main class="dashboard-overview">
+                <h1>BIENVENIDO A LA LIBRERIA DEL GRUPO-2</h1>
+                <h2>PANEL DE CONTROL</h2>
+                <p class="welcome-text">Aquí puede administrar toda la información relacionada con libros, autores, editoriales, clientes y facturas. Utilice el menú de navegación lateral para acceder a cada módulo y gestionar los procesos correspondientes.</p>
+                
+                <!-- Statistics Grid - Se llenará dinámicamente -->
+                <div class="stats-grid" id="statsGrid">
+                    <!-- Se generará dinámicamente con JavaScript -->
+                </div>
+
+                <!-- Nuevas secciones de reportes -->
+                <div class="reports-section">
+                    <h2>REPORTES Y ANÁLISIS</h2>
+                    
+                    <div class="reports-grid">
+                        <!-- Reporte de Ventas Semanales -->
+                        <div class="report-card">
+                            <div class="report-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h3><i class="fas fa-chart-line"></i> Reporte de Ventas Semanales</h3>
+                                <button class="pdf-button" onclick="generateWeeklySalesPDF()" title="Generar reporte PDF">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </button>
+                            </div>
+                            <div class="report-content">
+                                <div class="chart-placeholder" id="weeklyChart">
+                                    <i class="fas fa-chart-bar" style="margin-right: 10px;"></i>
+                                    Cargando datos...
+                                </div>
+                                <div id="weeklyStats" style="display: flex; justify-content: space-between; margin-top: 15px;">
+                                    <!-- Se llenará dinámicamente -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Libros de Baja Rotación -->
+                        <div class="report-card">
+                            <div class="report-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h3><i class="fas fa-exclamation-triangle"></i> Libros de Baja Rotación</h3>
+                                <button class="pdf-button" onclick="generateLowRotationPDF()" title="Generar reporte PDF">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </button>
+                            </div>
+                            <div class="report-content">
+                                <p>Libros con menos de 3 ventas en los últimos 30 días:</p>
+                                <div class="book-list" id="lowRotationBooks">
+                                    <!-- Se llenará dinámicamente -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Libros Más Vendidos por Categoría -->
+                        <div class="report-card">
+                            <div class="report-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h3><i class="fas fa-trophy"></i> Libros Más Vendidos por Categoría</h3>
+                                <button class="pdf-button" onclick="generateCategoryBooksPDF()" title="Generar reporte PDF">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </button>
+                            </div>
+                            <div class="report-content">
+                                <div class="category-tabs" id="categoryTabs">
+                                    <!-- Se generará dinámicamente -->
+                                </div>
+                                <div id="category-content">
+                                    <div class="book-list" id="categoryBooks">
+                                        <!-- Se llenará dinámicamente -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Best Sellers -->
+                        <div class="report-card">
+                            <div class="report-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h3><i class="fas fa-star"></i> Best Sellers Más Vendidos</h3>
+                                <button class="pdf-button" onclick="generateBestSellersPDF()" title="Generar reporte PDF">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </button>
+                            </div>
+                            <div class="report-content">
+                                <p>Los libros más vendidos de todos los tiempos en nuestra librería:</p>
+                                <div class="book-list" id="bestSellers">
+                                    <!-- Se llenará dinámicamente -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actividad Reciente -->
+                <section class="recent-activity">
+                    <h3>Actividad Reciente</h3>
+                    <ul id="recentActivity">
+                        <!-- Se llenará dinámicamente -->
+                    </ul>
+                </section>
+            </main>
+
+            <footer class="footer">
+                <div class="container">
+                    <p>&copy; 2025 Sistema de Gestión de Librería. Todos los derechos reservados.</p>
+                    <p>Versión 1.0</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    <!-- Loading spinner -->
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+        <p>Cargando datos...</p>
+    </div>
+
+    <!-- Modal para mostrar carpeta de descargas -->
+    <div id="downloadModal" class="download-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-folder-open"></i> Reporte Generado</h3>
+                <button class="close-modal" onclick="closeDownloadModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="download-success">
+                    <i class="fas fa-check-circle"></i>
+                    <p>¡Reporte PDF generado exitosamente!</p>
+                    <div class="file-info">
+                        <i class="fas fa-file-pdf"></i>
+                        <span id="fileName">reporte.pdf</span>
+                    </div>
+                    <p class="download-location">El archivo se ha guardado en su carpeta de descargas.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="close-button" onclick="closeDownloadModal()">
+                    <i class="fas fa-check"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="scripts.js"></script>
+
+    <style>
+        /* Estilos para los botones PDF */
+        .pdf-button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pdf-button:hover {
+            background: #c82333;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .pdf-button:active {
+            transform: translateY(0);
+        }
+
+        .pdf-button i {
+            font-size: 1em;
+        }
+
+        /* Estilos para el modal de descarga */
+        .download-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-header h3 i {
+            color: #8E24AA;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .modal-body {
+            padding: 30px 20px;
+        }
+
+        .download-success {
+            text-align: center;
+        }
+
+        .download-success i.fa-check-circle {
+            font-size: 3em;
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .download-success > p {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .file-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .file-info i {
+            color: #dc3545;
+            font-size: 1.5em;
+        }
+
+        .file-info span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .download-location {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+
+        .close-button {
+            background: #8E24AA;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-button:hover {
+            background: #7B1FA2;
+            transform: translateY(-1px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+            
+            .pdf-button {
+                padding: 6px 10px;
+                font-size: 0.8em;
+            }
+            
+            .report-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start !important;
+            }
+        }
+    </style>
+</body>
+</html>

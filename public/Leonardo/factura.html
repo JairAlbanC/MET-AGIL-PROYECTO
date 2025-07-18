@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión - Facturas</title>
+    
+    <link rel="stylesheet" href="../estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="factura.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <button class="hamburger-menu" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="sidebar-logo-area">
+                    <img src="../logo.png" alt="Logo del Sistema" style="height: 80px;"> 
+                    <a href="../index.html" class="sidebar-logo-text">Sistema de Gestión</a>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav-main">
+                <h3 class="nav-section-title">MENÚ PRINCIPAL</h3>
+                <ul>
+                    <li><a href="../Jair/libros.html" class="nav-item"><i class="fas fa-book"></i> Libros</a></li>
+                    <li><a href="../Jair/autor.html" class="nav-item"><i class="fas fa-user-edit"></i> Autores</a></li>
+                    <li><a href="../Maria/editorial.html" class="nav-item"><i class="fas fa-building"></i> Editoriales</a></li>
+                    <li><a href="factura.html" class="nav-item active"><i class="fas fa-file-invoice"></i> Facturas</a></li>
+                    <li><a href="../Ashley/cliente.html" class="nav-item"><i class="fas fa-users"></i> Clientes</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-bottom-links">
+                <ul>
+                    <li><a href="../index.html" class="nav-item"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" class="nav-item"><i class="fas fa-bell"></i> Notificaciones</a></li>
+                    <li><a href="#" class="nav-item"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="main-content-area">
+            <header class="topbar">
+                <p>Bienvenido, Usuario Admin</p>
+            </header>
+
+            <main class="page-content container">
+                <!-- SECCIÓN GENERAR FACTURA -->
+                <div class="container form-section formulario-card">
+                    <h1>GENERAR FACTURA</h1>
+
+                    <!-- Fila 1: Solo Cédula del Cliente (campos ocultos pero funcionales) -->
+                    <div class="form-field-group" style="flex: 1;">
+    <label for="clientCedula">Cédula del Cliente: <span class="required">*</span></label>
+    <input 
+        type="text" 
+        id="clientCedula" 
+        name="clientCedula" 
+        placeholder="Ej: 1714616123 (10 dígitos)" 
+        required 
+        maxlength="10" 
+        pattern="[0-9]{10}"
+        title="Ingrese exactamente 10 dígitos de cédula ecuatoriana válida"
+        autocomplete="off"
+        inputmode="numeric"
+    >
+    <div class="error-message">Ingrese una cédula ecuatoriana válida de 10 dígitos</div>
+    <div id="cedula-status" style="font-size: 12px; margin-top: 5px; font-weight: 500;"></div>
+    <small style="color: #6c757d; font-size: 11px; margin-top: 3px; display: block;">
+        📋 Se valida: provincia (01-24), tercer dígito < 6, y dígito verificador
+    </small>
+</div>
+
+                    <!-- Fila 2: Nombre, Apellido, Teléfono -->
+                    <div class="form-row">
+                        <div class="form-field-group">
+                            <label for="clientName">Nombre del Cliente: <span class="required">*</span></label>
+                            <input type="text" id="clientName" name="clientName" placeholder="Ingrese el nombre del cliente" required>
+                            <div class="error-message">Este campo es obligatorio</div>
+                        </div>
+
+                        <div class="form-field-group">
+                            <label for="clientLastName">Apellido del Cliente: <span class="required">*</span></label>
+                            <input type="text" id="clientLastName" name="clientLastName" placeholder="Ingrese el apellido del cliente" required>
+                            <div class="error-message">Este campo es obligatorio</div>
+                        </div>
+
+                        <div class="form-field-group">
+                            <label for="clientPhone">Teléfono: <span class="required">*</span></label>
+                            <input type="tel" id="clientPhone" name="clientPhone" placeholder="Solo números, ej: 0987654321" required pattern="[0-9]*" inputmode="numeric">
+                            <div class="error-message">Este campo es obligatorio</div>
+                        </div>
+                    </div>
+
+                    <!-- Fila 3: Email y Dirección -->
+                    <div class="form-row">
+                        <div class="form-field-group">
+                            <label for="clientEmail">Email: <span class="required">*</span></label>
+                            <input type="email" id="clientEmail" name="clientEmail" placeholder="Ingrese el email" required>
+                            <div class="error-message">Este campo es obligatorio</div>
+                        </div>
+
+                        <div class="form-field-group">
+                            <label for="clientAddress">Dirección: <span class="required">*</span></label>
+                            <input type="text" id="clientAddress" name="clientAddress" placeholder="Ingrese la dirección" required>
+                            <div class="error-message">Este campo es obligatorio</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN DETALLE DE FACTURA -->
+                <div class="container detalle-factura">
+                    <h3>DETALLE DE FACTURA</h3>
+                    <p><strong>Añadir Ítem</strong></p>
+                    
+                    <!-- Formulario para añadir ítems -->
+                    <div class="form-row">
+                        <div class="form-field-group">
+                            <label for="idDetalle">ID Detalle:</label>
+                            <input type="text" id="idDetalle" name="idDetalle" placeholder="Se generará automáticamente" readonly style="background-color: #f8f9fa; color: #6c757d;">
+                            <small style="color: #6c757d; font-size: 12px;">Se asigna automáticamente (DET-001, DET-002, etc.)</small>
+                        </div>
+
+                        <div class="form-field-group">
+                            <label for="libro">Libro: <span class="required">*</span></label>
+                            <select id="libro" name="libro" required>
+                                <option value="">Seleccionar libro...</option>
+                            </select>
+                            <div class="error-message">Este campo es obligatorio</div>
+                        </div>
+
+                        <div class="form-field-group">
+                            <label for="isbn">ISBN: <span class="required">*</span></label>
+                            <input type="text" id="isbn" name="isbn" placeholder="ISBN del libro" required>
+                            <div class="error-message">Este campo es obligatorio</div>
+                        </div>
+
+                        <div class="form-field-group">
+    <label for="cantidad">Cantidad: <span class="required">*</span></label>
+    <input 
+        type="number" 
+        id="cantidad" 
+        name="cantidad" 
+        min="1" 
+        max="999" 
+        value="1" 
+        required 
+        step="1"
+        pattern="[1-9][0-9]*"
+        title="Ingrese un número entero mayor a 0"
+        placeholder="Mínimo 1"
+        oninput="validarCantidad(this)"
+        onkeypress="return validarTeclaCantidad(event)"
+        onpaste="return false"
+    >
+    <div class="error-message">La cantidad debe ser mayor a 0</div>
+    <small style="color: #6c757d; font-size: 12px;">Cantidad mínima: 1, máxima: 999</small>
+</div>
+
+                        <div class="form-field-group">
+                            <label for="precioUnitario">Precio Unitario: <span class="required">*</span></label>
+                            <input type="number" id="precioUnitario" name="precioUnitario" step="0.01" min="0" value="0.00" required readonly>
+                            <div class="error-message">Este campo es obligatorio</div>
+                        </div>
+                    </div>
+                    
+                    <button id="addItemBtn" type="button" class="btn-primary-form">AÑADIR ÍTEM A FACTURA</button>
+
+                    <!-- Tabla de ítems -->
+                    <table class="invoice-table">
+                        <thead>
+                            <tr>
+                                <th>ID DETALLE</th>
+                                <th>LIBRO</th>
+                                <th>ISBN</th>
+                                <th>CANTIDAD</th>
+                                <th>PRECIO UNITARIO</th>
+                                <th>TOTAL</th>
+                                <th>ACCIÓN</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoiceItemsTableBody">
+                            <tr>
+                                <td colspan="7" class="no-items">No hay ítems en la factura.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- SECCIÓN DE TOTALES -->
+                <div class="container totals-section">
+                    <table class="totals-table">
+                        <tr>
+                            <td class="total-label">Subtotal:</td>
+                            <td id="subtotalCell">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="total-label">IVA (15%):</td>
+                            <td id="ivaCell">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="total-label"><strong>Total a Pagar:</strong></td>
+                            <td id="totalCell"><strong>$0.00</strong></td>
+                        </tr>
+                    </table>
+                    
+                    <button type="button" id="generatePdfBtn" class="btn-generate">GENERAR FACTURA</button>
+                </div>
+
+                <!-- SECCIÓN FACTURAS GENERADAS - ACTUALIZADA -->
+                <div class="container facturas-generadas">
+                    <h3><i class="fas fa-file-invoice-dollar"></i> FACTURAS GENERADAS</h3>
+                    
+                    <!-- Solo botón de refrescar y limpiar -->
+                    <div style="text-align: right; margin-bottom: 15px; display: flex; gap: 10px; justify-content: flex-end;">
+                        <button id="btnLimpiarAntiguas" class="btn-refresh" style="background-color: #dc3545;">
+                            <i class="fas fa-broom"></i> Limpiar Facturas Antiguas
+                        </button>
+                        <button id="btnRefrescar" class="btn-refresh">
+                            <i class="fas fa-sync-alt"></i> Actualizar Lista
+                        </button>
+                    </div>
+
+                    <!-- Tabla de facturas actualizada -->
+                   <div class="table-container">
+    
+    
+    <div class="table-wrapper">
+        <table class="facturas-table">
+            <thead>
+                <tr>
+                    <th>N° Factura</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Items</th>
+                    <th>Subtotal</th>
+                    <th>IVA</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="facturasTableBody">
+                <!-- Las facturas se cargan aquí dinámicamente -->
+                <tr>
+                    <td colspan="9" class="text-center">
+                        <i class="fas fa-spinner fa-spin"></i> Cargando facturas...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+                </div>
+            </main>
+
+            <footer class="footer">
+                <div class="container">
+                    <p>&copy; 2025 Sistema de Gestión de Librería. Todos los derechos reservados.</p>
+                    <p>Versión 1.0</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../scripts.js"></script>
+    <script src="factura.js"></script>
+</body>
+</html>

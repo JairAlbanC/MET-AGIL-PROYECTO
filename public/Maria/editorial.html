@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión - Editoriales</title>
+    
+    <link rel="stylesheet" href="../estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="editorial.css"> 
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <button class="hamburger-menu" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="sidebar-logo-area">
+                    <img src="../logo.png" alt="Logo del Sistema" style="height: 80px;">  
+                    <a href="/index.html" class="sidebar-logo-text">Sistema de Gestión</a>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav-main">
+                <h3 class="nav-section-title">MENÚ PRINCIPAL</h3>
+                <ul>
+                    <li><a href="../Jair/libros.html" class="nav-item"><i class="fas fa-book"></i> Libros</a></li>
+                    <li><a href="../Jair/autor.html" class="nav-item"><i class="fas fa-user-edit"></i> Autores</a></li>
+                    <li><a href="editorial.html" class="nav-item active"><i class="fas fa-building"></i> Editoriales</a></li>
+                    <li><a href="../Leonardo/factura.html" class="nav-item"><i class="fas fa-file-invoice"></i> Facturas</a></li>
+                    <li><a href="../Ashley/cliente.html" class="nav-item"><i class="fas fa-users"></i> Clientes</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-bottom-links">
+                <ul>
+                    <li><a href="/index.html" class="nav-item"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" class="nav-item"><i class="fas fa-bell"></i> Notificaciones</a></li>
+                    <li><a href="#" class="nav-item"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="main-content-area">
+            <header class="topbar">
+                <p>Bienvenido, Usuario Admin</p>
+            </header>
+
+            <main class="page-content container">
+                <h1>Gestión de Editoriales</h1>
+
+                <section class="formulario-card"> 
+                    <h2>Registrar Editorial</h2>
+                    <form id="formEditoriales">
+                        <div class="form-grid-container">
+                            <div class="form-field-group">
+                                <label for="ideditorial">ID Editorial:</label>
+                                <input type="text" id="ideditorial" name="ideditorial" required>
+                                <span class="error-message" id="errorIdEditorial"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                                <span class="error-message" id="errorNombre"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="isbn">Último ISBN:</label>
+                                <input type="text" id="isbn" name="isbn">
+                                <span class="error-message" id="errorIsbn"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="cantidad">Cantidad de Libros:</label>
+                                <input type="number" id="cantidad" name="cantidad" required min="0">
+                                <span class="error-message" id="errorCantidad"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email">
+                                <span class="error-message" id="errorEmail"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="tel" id="telefono" name="telefono">
+                                <span class="error-message" id="errorTelefono"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="sitioWeb">Sitio Web:</label>
+                                <input type="url" id="sitioWeb" name="sitioWeb" required>
+                                <span class="error-message" id="errorSitioWeb"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="estado">Estado:</label>
+                                <select id="estado" name="estado" required>
+                                    <option value="">Seleccione un estado</option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+                                <span class="error-message" id="errorEstado"></span>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="reset" class="btn-secondary">Limpiar</button>
+                            <button type="submit" class="btn-primary-form">Registrar Editorial</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="formulario-card" id="seccionEditar" style="display: none;">
+                    <h2>Actualizar Editorial</h2>
+                    <form id="editarFormEditoriales">
+                        <input type="hidden" id="editarIdEditorialHidden"> <div class="form-grid-container">
+                            <div class="form-field-group">
+                                <label for="editarIdEditorial">ID Editorial:</label>
+                                <input type="text" id="editarIdEditorial" name="editarIdEditorial" disabled> <span class="error-message" id="errorEditarIdEditorial"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editarNombre">Nombre:</label>
+                                <input type="text" id="editarNombre" name="editarNombre" required>
+                                <span class="error-message" id="errorEditarNombre"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editarIsbn">Último ISBN:</label>
+                                <input type="text" id="editarIsbn" name="editarIsbn">
+                                <span class="error-message" id="errorEditarIsbn"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editarCantidad">Cantidad de Libros:</label>
+                                <input type="number" id="editarCantidad" name="editarCantidad" required min="0">
+                                <span class="error-message" id="errorEditarCantidad"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editarEmail">Email:</label>
+                                <input type="email" id="editarEmail" name="editarEmail">
+                                <span class="error-message" id="errorEditarEmail"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editarTelefono">Teléfono:</label>
+                                <input type="tel" id="editarTelefono" name="editarTelefono">
+                                <span class="error-message" id="errorEditarTelefono"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editarSitioWeb">Sitio Web:</label>
+                                <input type="url" id="editarSitioWeb" name="editarSitioWeb" required>
+                                <span class="error-message" id="errorEditarSitioWeb"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editarEstado">Estado:</label>
+                                <select id="editarEstado" name="editarEstado" required>
+                                    <option value="">Seleccione un estado</option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+                                <span class="error-message" id="errorEditarEstado"></span>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="cancelarEdicion()">Cancelar</button>
+                            <button type="submit" class="btn-primary-form">Actualizar Editorial</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="formulario-card"> 
+                    <h2>Editoriales Registradas:</h2>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Último ISBN</th>
+                                    <th>Cant. Libros</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Sitio Web</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-editoriales">
+                                </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="footer">
+                <div class="container">
+                    <p>&copy; 2025 Sistema de Gestión de Librería. Todos los derechos reservados.</p>
+                    <p>Versión 1.0</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="../scripts.js"></script>
+    <script src="editorial.js"></script>
+</body>
+</html>

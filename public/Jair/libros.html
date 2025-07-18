@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión - Libros</title>
+    
+    <link rel="stylesheet" href="../estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Link to the specific styles for books -->
+    <link rel="stylesheet" href="librostyle.css"> 
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <button class="hamburger-menu" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="sidebar-logo-area">
+                    <img src="../logo.png" alt="Logo del sistema" style="height: 80px;"> 
+                    <a href="../index.html" class="sidebar-logo-text">Sistema de Gestión</a>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav-main">
+                <h3 class="nav-section-title">MENÚ PRINCIPAL</h3>
+                <ul>
+                    <li><a href="libros.html" class="nav-item active"><i class="fas fa-book"></i> Libros</a></li>
+                    <li><a href="autor.html" class="nav-item"><i class="fas fa-user-edit"></i> Autores</a></li>
+                    <li><a href="../Maria/editorial.html" class="nav-item"><i class="fas fa-building"></i> Editoriales</a></li>
+                    <li><a href="../Leonardo/factura.html" class="nav-item"><i class="fas fa-file-invoice"></i> Facturas</a></li>
+                    <li><a href="../Ashley/cliente.html" class="nav-item"><i class="fas fa-users"></i> Clientes</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-bottom-links">
+                <ul>
+                    <li><a href="../index.html" class="nav-item"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" class="nav-item"><i class="fas fa-bell"></i> Notificaciones</a></li>
+                    <li><a href="#" class="nav-item"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="main-content-area">
+            <header class="topbar">
+                <p>Bienvenido, Usuario Admin</p>
+            </header>
+
+            <main class="page-content container">
+                <!-- Apply card-like styling to the form section -->
+                <div class="formulario formulario-card"> 
+                    <h2>Registro de Libros</h2>
+                    <form id="formLibros">
+                        <!-- NEW: Wrap form fields in a flex container -->
+                        <div class="form-grid-container">
+                            <div class="form-field-group">
+                                <label for="isbn">ISBN:</label>
+                                <input type="number" id="isbn" name="isbn" required>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="titulo">Título del Libro:</label>
+                                <input type="text" id="titulo" name="titulo" required>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editorial">Editorial:</label>
+                                <select id="editorial" name="editorial" required>
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="autor">Autor:</label>
+                                <select id="autor" name="autor" required>
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </div>
+
+                            <!-- NUEVO: Campo Tipo -->
+                            <div class="form-field-group">
+                                <label for="tipo">Tipo:</label>
+                                <select name="tipo" id="tipo" required>
+                                    <option value="">Seleccione</option>
+                                    <option value="Digital">Digital</option>
+                                    <option value="Fisico">Físico</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="categoria">Categoría:</label>
+                                <select id="categoria" name="categoria" required>
+                                    <option value="">Seleccione</option>
+                                    <option value="Ficción">Ficción</option>
+                                    <option value="Educativo">Educativo</option>
+                                    <option value="Romance">Romance</option>
+                                    <option value="Historia">Historia</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="anio">Año de Publicación:</label>
+                                <input type="number" id="anio" name="anio" min="1000" max="2025" required>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="precio">Precio:</label>
+                                <input type="text" id="precio" name="precio" placeholder= "$ 0.00" required>
+                            </div>
+
+                            <!-- NUEVO: Campo Cantidad -->
+                            <div class="form-field-group">
+                                <label for="cantidad">Cantidad:</label>
+                                <input type="number" id="cantidad" name="cantidad" min="0" step="1" placeholder="0" required>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="bestseller">Best Seller:</label>
+                                <select name="bestseller" id="bestseller" required>
+                                    <option value="Si">Si</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="estado">Estado</label>
+                                <select name="estado" id="estado" required>
+                                    <option value="">Seleccione</option>
+                                    <option value="Nuevo">Nuevo</option>
+                                    <option value="Donado">Donado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" id="registrar" class="btn-primary-form">Registrar Libro</button>
+                    </form>
+                </div>
+
+                <!-- Lista de libros con paginación -->
+                <div class="lista-libros formulario-card"> 
+                    <h3>Libros Registrados:</h3>
+                    
+                    <!-- NUEVO: Filtros de búsqueda -->
+                    <div class="filtros-busqueda" style="margin-bottom: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
+                        <h4 style="margin-bottom: 15px; color: #495057;">
+                            <i class="fas fa-search"></i> Filtros de Búsqueda
+                        </h4>
+                        
+                        <div class="filtros-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; align-items: end;">
+                            <!-- Búsqueda por texto -->
+                            <div class="filtro-grupo">
+                                <label for="buscar-texto" style="display: block; margin-bottom: 5px; font-weight: bold;">Buscar por título o autor:</label>
+                                <input type="text" id="buscar-texto" placeholder="Escriba para buscar..." style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                            </div>
+                            
+                            <!-- Filtro por categoría -->
+                            <div class="filtro-grupo">
+                                <label for="filtro-categoria" style="display: block; margin-bottom: 5px; font-weight: bold;">Categoría:</label>
+                                <select id="filtro-categoria" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                                    <option value="">Todas las categorías</option>
+                                    <option value="Ficción">Ficción</option>
+                                    <option value="Educativo">Educativo</option>
+                                    <option value="Romance">Romance</option>
+                                    <option value="Historia">Historia</option>
+                                </select>
+                            </div>
+                            
+                            <!-- NUEVO: Filtro por tipo -->
+                            <div class="filtro-grupo">
+                                <label for="filtro-tipo" style="display: block; margin-bottom: 5px; font-weight: bold;">Tipo:</label>
+                                <select id="filtro-tipo" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                                    <option value="">Todos los tipos</option>
+                                    <option value="Digital">Digital</option>
+                                    <option value="Fisico">Físico</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Filtro por estado -->
+                            <div class="filtro-grupo">
+                                <label for="filtro-estado" style="display: block; margin-bottom: 5px; font-weight: bold;">Estado:</label>
+                                <select id="filtro-estado" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                                    <option value="">Todos los estados</option>
+                                    <option value="Nuevo">Nuevo</option>
+                                    <option value="Donado">Donado</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Botones de acción -->
+                            <div class="filtro-grupo" style="display: flex; gap: 10px;">
+                                <button onclick="aplicarFiltros()" style="flex: 1; padding: 8px 12px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                                    <i class="fas fa-filter"></i> Filtrar
+                                </button>
+                                <button onclick="limpiarFiltros()" style="flex: 1; padding: 8px 12px; background-color: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                                    <i class="fas fa-times"></i> Limpiar
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Información de resultados filtrados -->
+                        <div id="info-filtros" style="margin-top: 10px; color: #6c757d; font-size: 0.9em;">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <!-- Información de paginación -->
+                    <div class="pagination-info">
+                        <span id="info-paginacion">Cargando...</span>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ISBN</th>
+                                    <th>Titulo</th>
+                                    <th>Editorial</th>
+                                    <th>Autor</th>
+                                    <th>Tipo</th>
+                                    <th>Categoría</th>
+                                    <th>Año de Publicación</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th> <!-- NUEVA COLUMNA -->
+                                    <th>Best Seller</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-libros">
+                                <!-- Las filas se llenarán dinámicamente con JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Controles de paginación -->
+                    <div class="pagination-controls">
+                        <div class="pagination-buttons">
+                            <button 
+                                id="btn-anterior" 
+                                onclick="cambiarPagina('anterior')"
+                                disabled
+                            >
+                                ← Anterior
+                            </button>
+                            
+                            <div class="pagination-info-center">
+                                <span>Página </span>
+                                <span id="pagina-actual">1</span>
+                                <span> de </span>
+                                <span id="total-paginas">1</span>
+                            </div>
+                            
+                            <button 
+                                id="btn-siguiente" 
+                                onclick="cambiarPagina('siguiente')"
+                                disabled
+                            >
+                                Siguiente →
+                            </button>
+                        </div>
+                        
+                        <!-- Opción para ir a página específica -->
+                        <div class="goto-page">
+                            <label for="input-pagina">Ir a página:</label>
+                            <input 
+                                type="number" 
+                                id="input-pagina" 
+                                min="1" 
+                                max="1" 
+                                placeholder="1"
+                            >
+                            <button 
+                                onclick="irAPagina(parseInt(document.getElementById('input-pagina').value))"
+                            >
+                                Ir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="footer">
+                <div class="container">
+                    <p>&copy; 2025 Sistema de Gestión de Librería. Todos los derechos reservados.</p>
+                    <p>Versión 1.0</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="../scripts.js"></script>
+    <script src="libros.js"></script>
+</body>
+</html>

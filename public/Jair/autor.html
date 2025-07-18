@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión - Autores</title>
+    
+    <link rel="stylesheet" href="../estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="autor.css"> 
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <button class="hamburger-menu" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="sidebar-logo-area">
+                    <img src="../logo.png" alt="Logo del Sistema" style="height: 80px;">
+                    <a href="/index.html" class="sidebar-logo-text">Sistema de Gestión</a>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav-main">
+                <h3 class="nav-section-title">MENÚ PRINCIPAL</h3>
+                <ul>
+                    <li><a href="../Jair/libros.html" class="nav-item"><i class="fas fa-book"></i> Libros</a></li>
+                    <li><a href="autor.html" class="nav-item active"><i class="fas fa-user-edit"></i> Autores</a></li>
+                    <li><a href="../Maria/editorial.html" class="nav-item"><i class="fas fa-building"></i> Editoriales</a></li>
+                    <li><a href="../Leonardo/factura.html" class="nav-item"><i class="fas fa-file-invoice"></i> Facturas</a></li>
+                    <li><a href="../Ashley/cliente.html" class="nav-item"><i class="fas fa-users"></i> Clientes</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-bottom-links">
+                <ul>
+                    <li><a href="/index.html" class="nav-item"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" class="nav-item"><i class="fas fa-bell"></i> Notificaciones</a></li>
+                    <li><a href="#" class="nav-item"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="main-content-area">
+            <header class="topbar">
+                <p>Bienvenido, Usuario Admin</p>
+            </header>
+
+            <main class="page-content container">
+                <h1>Gestión de Autores</h1>
+
+                <section class="formulario-card"> 
+                    <h2>Registrar Autor</h2>
+                    <form id="formAutores">
+                        <div class="form-grid-container">
+                            <div class="form-field-group">
+                                <label for="idautor">ID Autor:</label>
+                                <input type="text" id="idautor" name="idautor" required>
+                                <span class="error-message" id="errorIdautor"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                                <span class="error-message" id="errorNombre"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="apellido">Apellido:</label>
+                                <input type="text" id="apellido" name="apellido" required>
+                                <span class="error-message" id="errorApellido"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" required>
+                                <span class="error-message" id="errorEmail"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="tel" id="telefono" name="telefono">
+                                <span class="error-message" id="errorTelefono"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="estado">Estado:</label>
+                                <select id="estado" name="estado" required>
+                                    <option value="">Seleccione un estado</option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+                                <span class="error-message" id="errorEstado"></span>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="reset" class="btn-secondary">Limpiar</button>
+                            <button type="submit" class="btn-primary-form">Registrar Autor</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="formulario-card" id="seccionEditar" style="display: none;">
+                    <h2>Actualizar Autor</h2>
+                    <form id="editarFormAutores">
+                        <input type="hidden" id="editarIdHidden">
+                        <div class="form-grid-container">
+                            <div class="form-field-group">
+                                <label for="editarId">ID Autor:</label>
+                                <input type="text" id="editarId" name="editarId" disabled>
+                                <span class="error-message" id="errorEditarId"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editarNombre">Nombre:</label>
+                                <input type="text" id="editarNombre" name="editarNombre" required>
+                                <span class="error-message" id="errorEditarNombre"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editarApellido">Apellido:</label>
+                                <input type="text" id="editarApellido" name="editarApellido" required>
+                                <span class="error-message" id="errorEditarApellido"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editarEmail">Email:</label>
+                                <input type="email" id="editarEmail" name="editarEmail" required>
+                                <span class="error-message" id="errorEditarEmail"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editarTelefono">Teléfono:</label>
+                                <input type="tel" id="editarTelefono" name="editarTelefono">
+                                <span class="error-message" id="errorEditarTelefono"></span>
+                            </div>
+
+                            <div class="form-field-group">
+                                <label for="editarEstado">Estado:</label>
+                                <select id="editarEstado" name="editarEstado" required>
+                                    <option value="">Seleccione un estado</option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+                                <span class="error-message" id="errorEditarEstado"></span>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="cancelarEdicion()">Cancelar</button>
+                            <button type="submit" class="btn-primary-form">Actualizar Autor</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="formulario-card"> 
+                    <h2>Autores Registrados:</h2>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-autores">
+                                <!-- Los datos se cargarán aquí dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="footer">
+                <div class="container">
+                    <p>&copy; 2025 Sistema de Gestión de Librería. Todos los derechos reservados.</p>
+                    <p>Versión 1.0</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="../scripts.js"></script>
+    <script src="autor.js"></script>
+</body>
+</html>

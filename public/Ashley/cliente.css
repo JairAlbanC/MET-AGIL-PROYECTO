@@ -1,0 +1,309 @@
+/*
+** MODIFICATIONS FOR ASHLEY/CLIENTE.CSS **
+
+This stylesheet defines styles for the Client management page.
+It implements a consistent card-based layout and flexible form fields
+to match the rest of the application's design.
+*/
+
+/* Removed body styles as they are now handled by global estilos.css */
+/*
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;
+    margin: 0;
+    padding: 20px;
+}
+*/
+
+/* General header styles for main page titles */
+h1 {
+    color: #00796b; /* Dark cyan for main page titles */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Section headers within cards */
+h2, h3 {
+    text-align: center;
+    color: #00796b; /* Dark cyan for section headers */
+    margin-top: 30px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e0f2f1; /* Subtle separator */
+    padding-bottom: 10px;
+}
+
+
+/* --- Card-like styling for main sections (forms, tables) --- */
+.formulario-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Soft shadow */
+    padding: 30px; /* Generous internal padding */
+    margin-bottom: 25px; /* Space between sections */
+    box-sizing: border-box;
+    width: 100%; /* Ensures they take full width within .page-content.container */
+    max-width: 900px; /* Max width to prevent content from being too stretched */
+    margin-left: auto; /* Center within the .page-content.container */
+    margin-right: auto; /* Center within the .page-content.container */
+}
+
+
+/* --- Flexbox Container for Form Fields (Replaces .fila) --- */
+.form-grid-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    gap: 20px; /* Space between individual form field groups */
+    margin-bottom: 20px; /* Space below the entire group of fields */
+}
+
+/* Styles for each individual form field group (Replaces .campo) */
+.form-field-group {
+    flex: 1 1 200px; /* Allows fields to grow (1), shrink (1), and have a base width of 200px.
+                       Adjust 200px to control how many fit per row. */
+    min-width: 180px; /* Ensures fields don't get too narrow on smaller screens */
+    display: flex;
+    flex-direction: column; /* Stacks label over input */
+    box-sizing: border-box;
+}
+
+/* Styles for labels within form field groups */
+.form-field-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+    font-size: 0.95em;
+}
+
+/* Styles for input fields and selects within form field groups */
+.form-field-group input[type="text"],
+.form-field-group input[type="email"],
+.form-field-group input[type="tel"], /* Added for consistency */
+.form-field-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    color: #333;
+    background-color: #fcfcfc;
+}
+
+/* Focus styles for inputs */
+.form-field-group input:focus,
+.form-field-group select:focus {
+    border-color: #00796b;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2);
+}
+
+/* --- Styles for form action buttons (Limpiar, Guardar, Cancelar, Actualizar) --- */
+.form-actions {
+    display: flex;
+    justify-content: flex-end; /* Alinea los botones a la derecha del formulario */
+    gap: 15px; /* Espacio entre los botones */
+    margin-top: 25px; /* Espacio arriba del grupo de botones */
+}
+
+/* Primary Form Button (Guardar, Actualizar) */
+.btn-primary-form {
+    background-color: #00796b; /* Dark cyan */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.btn-primary-form:hover {
+    background-color: #004d40;
+    transform: translateY(-2px);
+}
+
+/* Secondary Button (Limpiar, Cancelar) */
+.btn-secondary {
+    background-color: #9E9E9E; /* Gris */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.btn-secondary:hover {
+    background-color: #616161; /* Gris más oscuro */
+    transform: translateY(-2px);
+}
+
+
+/* --- Table styling --- */
+.table-responsive {
+    overflow-x: auto; /* Ensures table is scrollable on small screens */
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: white;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #00796b;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    padding: 15px 12px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2fafa;
+}
+
+tbody tr:hover {
+    background-color: #e0f7fa;
+}
+
+/* Style for the radio button column (Acción) */
+table td:first-child {
+    text-align: center;
+    width: 40px; /* Give it a small fixed width */
+    vertical-align: middle; /* Center vertically if content varies */
+}
+
+/* --- Styles for global table action buttons (Editar, Eliminar) --- */
+.table-actions {
+    display: flex;
+    justify-content: center; /* Centra los botones bajo la tabla */
+    gap: 15px; /* Espacio entre los botones */
+    margin-top: 25px; /* Espacio arriba del grupo de botones */
+}
+
+/* Global Edit Button */
+.btn-editar-global { /* New class for global edit button */
+    background-color: #fb8c00; /* Orange */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.btn-editar-global:hover {
+    background-color: #e65100;
+    transform: translateY(-1px);
+}
+
+/* Global Delete Button */
+.btn-delete { /* New class for global delete button */
+    background-color: #e53935; /* Red */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.btn-delete:hover {
+    background-color: #c62828;
+    transform: translateY(-1px);
+}
+
+
+/* --- Responsive adjustments --- */
+@media (max-width: 992px) {
+    .formulario-card {
+        padding: 25px;
+        margin-bottom: 20px;
+    }
+    .form-grid-container {
+        gap: 15px;
+    }
+    .form-field-group {
+        flex: 1 1 200px;
+    }
+    h1 { font-size: 2em; margin-bottom: 25px; }
+    h2, h3 { font-size: 1.6em; margin-bottom: 20px; }
+    .btn-primary-form, .btn-secondary, .btn-editar-global, .btn-delete {
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+    table { font-size: 0.9em; }
+    th, td { padding: 10px; }
+}
+
+@media (max-width: 768px) {
+    .form-grid-container {
+        flex-direction: column; /* Stack fields vertically on smaller screens */
+        gap: 10px;
+    }
+    .form-field-group {
+        flex: 1 1 100%;
+        min-width: unset;
+    }
+    .formulario-card {
+        padding: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    h1 { font-size: 1.8em; margin-bottom: 20px; }
+    h2, h3 { font-size: 1.4em; margin-bottom: 15px; }
+    .form-actions, .table-actions {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px;
+    }
+    .btn-primary-form, .btn-secondary, .btn-editar-global, .btn-delete {
+        width: 100%; /* Make buttons full width when stacked */
+        margin-left: 0;
+        margin-right: 0;
+        transform: none; /* Remove transform on mobile buttons */
+        box-shadow: none;
+    }
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    table {
+        min-width: 700px; /* Ensure table has a minimum width for scrolling if needed */
+    }
+}
+
+@media (max-width: 480px) {
+    .formulario-card {
+        padding: 15px;
+    }
+    h1 { font-size: 1.5em; }
+    h2, h3 { font-size: 1.2em; }
+    .btn-primary-form, .btn-secondary, .btn-editar-global, .btn-delete {
+        padding: 10px 15px;
+        font-size: 0.85em;
+    }
+}
